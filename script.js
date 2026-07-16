@@ -1809,7 +1809,7 @@ window.addEventListener("scroll",()=>{
 
 });
 let lastScrollTop = 0;
-const navbar = document.querySelector(".navbar");
+const navbar = document.querySelector(".header");
 
 window.addEventListener("scroll", () => {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
