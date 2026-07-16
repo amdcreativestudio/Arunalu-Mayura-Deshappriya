@@ -1796,3 +1796,29 @@ initPassiveScroll();
 initVisibilityAPI();
 
 prefetchLinks();
+
+/*==========================
+AUTO HIDE NAVBAR
+==========================*/
+
+let lastScroll = 0;
+
+const header = document.querySelector(".header");
+
+window.addEventListener("scroll",()=>{
+
+    const current = window.pageYOffset;
+
+    if(current > lastScroll && current > 120){
+
+        header.classList.add("hide");
+
+    }else{
+
+        header.classList.remove("hide");
+
+    }
+
+    lastScroll = current;
+
+});
