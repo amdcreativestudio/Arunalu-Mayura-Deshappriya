@@ -1117,15 +1117,18 @@ button,
 ==================================================*/
 
 .navbar{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:30px;
 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    z-index: 1000;
+    transition: transform .35s ease;
 }
 
 /*==================================================
