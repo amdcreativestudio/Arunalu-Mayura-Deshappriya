@@ -1808,3 +1808,19 @@ window.addEventListener("scroll",()=>{
     lastScroll = current;
 
 });
+let lastScrollTop = 0;
+const navbar = document.querySelector(".navbar");
+
+window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (!navbar) return;
+
+    if (currentScroll > lastScrollTop && currentScroll > 100) {
+        navbar.style.transform = "translateY(-100%)";
+    } else {
+        navbar.style.transform = "translateY(0)";
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
