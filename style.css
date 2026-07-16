@@ -5525,3 +5525,15 @@ textarea{
     }
 
 }
+/* AUTO HIDE NAVBAR */
+
+.header{
+
+    transition:transform .35s ease;
+
+}
+
+.header.hide{
+
+    transform:translateY(-120%);
+}
