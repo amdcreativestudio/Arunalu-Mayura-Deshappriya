@@ -1097,6 +1097,21 @@ button,
 
 }
 
+.hero-tag{
+
+    display:inline-block;
+
+    margin-bottom:20px;
+
+}
+
+.hero-title{
+
+    margin-top:0;
+
+    line-height:1.15;
+
+}
 /*==================================================
   NAVBAR
 ==================================================*/
