@@ -204,84 +204,12 @@ console.log("%cAMD Portfolio","color:#3b82f6;font-size:26px;font-weight:bold;");
   CUSTOM CURSOR
 ==================================================*/
 
-function initCustomCursor(){
 
-    const dot=document.querySelector(".cursor-dot");
 
-    const outline=document.querySelector(".cursor-outline");
-
-    if(!dot || !outline) return;
-
-    let mouseX=0;
-
-    let mouseY=0;
-
-    let outlineX=0;
-
-    let outlineY=0;
-
-    document.addEventListener("mousemove",(e)=>{
-
-        mouseX=e.clientX;
-
-        mouseY=e.clientY;
-
-        dot.style.left=mouseX+"px";
-
-        dot.style.top=mouseY+"px";
-
-    });
-
-    function animateCursor(){
-
-        outlineX+=(mouseX-outlineX)*0.15;
-
-        outlineY+=(mouseY-outlineY)*0.15;
-
-        outline.style.left=outlineX+"px";
-
-        outline.style.top=outlineY+"px";
-
-        requestAnimationFrame(animateCursor);
-
-    }
-
-    animateCursor();
-
-}
+   
 
 /*==================================================
-  CURSOR HOVER EFFECT
-==================================================*/
 
-function initCursorHover(){
-
-    const hoverItems=document.querySelectorAll(
-
-        "a, button, .btn, .project-card, .skill-card, .about-card, .certificate-card"
-
-    );
-
-    hoverItems.forEach(item=>{
-
-        item.addEventListener("mouseenter",()=>{
-
-            document.body.classList.add("cursor-hover");
-
-        });
-
-        item.addEventListener("mouseleave",()=>{
-
-            document.body.classList.remove("cursor-hover");
-
-        });
-
-    });
-
-}
-
-/*==================================================
-  CURSOR HIDE
 ==================================================*/
 
 function initCursorVisibility(){
