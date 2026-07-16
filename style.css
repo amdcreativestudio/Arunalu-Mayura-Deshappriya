@@ -725,7 +725,7 @@ button,
 .certificate-card,
 .timeline-item{
 
-    cursor:none;
+cursor:auto;
 
 }
 
