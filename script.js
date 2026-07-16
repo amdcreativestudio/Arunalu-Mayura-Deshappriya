@@ -1,270 +1,198 @@
+
 /*==================================================
-  FINAL POLISH & UTILITIES
+  SCRIPT.JS - PART 01
+  PRELOADER & INITIAL SETUP
 ==================================================*/
 
-/*-----------------------------------------------
-  ACCESSIBILITY
-------------------------------------------------*/
+"use strict";
 
-:focus-visible{
+/*==================================================
+  DOM READY
+==================================================*/
 
-    outline:3px solid #3b82f6;
+document.addEventListener("DOMContentLoaded", () => {
 
-    outline-offset:4px;
+    initializePortfolio();
 
-    border-radius:8px;
+});
 
-}
+/*==================================================
+  INITIALIZE
+==================================================*/
 
-html{
+function initializePortfolio(){
 
-    scroll-padding-top:100px;
+    initPreloader();
 
-}
+    preventImageDragging();
 
-/*-----------------------------------------------
-  TEXT UTILITIES
-------------------------------------------------*/
+    preventRightClickOnImages();
 
-.text-primary{
+    smoothAnchorSetup();
 
-    color:#3b82f6;
+    initCustomCursor();
 
-}
+    initCursorHover();
 
-.text-secondary{
+    initCursorVisibility();
 
-    color:#06b6d4;
+    initScrollEffects();
 
-}
+    initScrollDirection();
 
-.text-light{
+    initMobileMenu();
 
-    color:#cbd5e1;
+    createTypingCursor();
 
-}
+    animateTypingCursor();
 
-.text-white{
+    initTypingEffect();
 
-    color:#ffffff;
+    initScrollReveal();
 
-}
+    staggerProjects();
 
-.fw-400{
+    staggerSkills();
 
-    font-weight:400;
+    initActiveNavigation();
 
-}
+    initNavHover();
 
-.fw-500{
+    initBackToTop();
 
-    font-weight:500;
+    initBackToTopHover();
 
-}
+    initProjectFilter();
 
-.fw-600{
+    initProjectHover();
 
-    font-weight:600;
+    resetCounters();
 
-}
+    initCounters();
 
-.fw-700{
+    initLightThemeVariables();
 
-    font-weight:700;
+    initThemeToggle();
 
-}
+    initContactForm();
 
-.fw-800{
+    initMagneticButtons();
 
-    font-weight:800;
+    initHeroParallax();
 
-}
+    initFloatingCards();
 
-.fw-900{
+    initTiltCards();
 
-    font-weight:900;
+    initLazyImages();
 
-}
+    preloadHeroImage();
 
-/*-----------------------------------------------
-  SPACING
-------------------------------------------------*/
+    initPassiveScroll();
 
-.mt-1{margin-top:10px;}
-.mt-2{margin-top:20px;}
-.mt-3{margin-top:30px;}
-.mt-4{margin-top:40px;}
-.mt-5{margin-top:50px;}
+    initVisibilityAPI();
 
-.mb-1{margin-bottom:10px;}
-.mb-2{margin-bottom:20px;}
-.mb-3{margin-bottom:30px;}
-.mb-4{margin-bottom:40px;}
-.mb-5{margin-bottom:50px;}
-
-/*-----------------------------------------------
-  FLEX
-------------------------------------------------*/
-
-.flex{
-
-    display:flex;
+    prefetchLinks();
 
 }
 
-.flex-center{
+/*==================================================
+  PRELOADER
+==================================================*/
 
-    display:flex;
+function initPreloader(){
 
-    align-items:center;
+    const preloader = document.getElementById("preloader");
 
-    justify-content:center;
+    if(!preloader) return;
 
-}
+    window.addEventListener("load", () => {
 
-.flex-between{
+        setTimeout(() => {
 
-    display:flex;
+            preloader.classList.add("hide");
 
-    align-items:center;
+            document.body.classList.add("loaded");
 
-    justify-content:space-between;
+        },1200);
 
-}
+        setTimeout(() => {
 
-/*-----------------------------------------------
-  DISPLAY
-------------------------------------------------*/
+            preloader.remove();
 
-.hidden{
+        },2200);
 
-    display:none !important;
-
-}
-
-.visible{
-
-    display:block !important;
+    });
 
 }
 
-/*-----------------------------------------------
-  IMAGE OPTIMIZATION
-------------------------------------------------*/
+/*==================================================
+  SMOOTH ANCHORS
+==================================================*/
 
-img{
+function smoothAnchorSetup(){
 
-    user-select:none;
+    const links=document.querySelectorAll('a[href^="#"]');
 
-    -webkit-user-drag:none;
+    links.forEach(link=>{
 
-}
+        link.addEventListener("click",function(e){
 
-/*-----------------------------------------------
-  LOADING STATE
-------------------------------------------------*/
+            const target=document.querySelector(this.getAttribute("href"));
 
-.loading{
+            if(!target) return;
 
-    pointer-events:none;
+            e.preventDefault();
 
-    opacity:.6;
+            target.scrollIntoView({
 
-}
+                behavior:"smooth",
 
-/*-----------------------------------------------
-  GLASS EFFECT
-------------------------------------------------*/
+                block:"start"
 
-.glass{
+            });
 
-    background:rgba(255,255,255,.05);
+        });
 
-    border:1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:blur(20px);
+    });
 
 }
 
-/*-----------------------------------------------
-  HOVER GLOW
-------------------------------------------------*/
+/*==================================================
+  PREVENT IMAGE DRAGGING
+==================================================*/
 
-.glow-hover{
+function preventImageDragging(){
 
-    transition:.35s ease;
+    document.querySelectorAll("img").forEach(img=>{
 
-}
+        img.setAttribute("draggable","false");
 
-.glow-hover:hover{
-
-    box-shadow:
-
-        0 0 20px rgba(59,130,246,.35),
-
-        0 0 40px rgba(59,130,246,.15);
+    });
 
 }
 
-/*-----------------------------------------------
-  SMOOTH SCROLL FIX
-------------------------------------------------*/
+/*==================================================
+  DISABLE RIGHT CLICK ON IMAGES
+==================================================*/
 
-body{
+function preventRightClickOnImages(){
 
-    overflow-x:hidden;
+    document.addEventListener("contextmenu",(event)=>{
 
-}
+        if(event.target.tagName==="IMG"){
 
-/*-----------------------------------------------
-  PRINT
-------------------------------------------------*/
+            event.preventDefault();
 
-@media print{
+        }
 
-    .header,
-    .back-to-top,
-    .hero-social,
-    .contact-form,
-    .project-buttons,
-    .certificate-buttons{
-
-        display:none !important;
-
-    }
-
-    body{
-
-        background:#ffffff;
-
-        color:#000000;
-
-    }
+    });
 
 }
 
-/*-----------------------------------------------
-  REDUCED MOTION
-------------------------------------------------*/
+console.clear();
 
-@media (prefers-reduced-motion:reduce){
-
-    *{
-
-        animation:none !important;
-
-        transition:none !important;
-
-        scroll-behavior:auto !important;
-
-    }
-
-}
-
-/*-----------------------------------------------
-  END OF FILE
-------------------------------------------------*/
-
+console.log("%cAMD Portfolio","color:#3b82f6;font-size:26px;font-weight:bold;");
 /*==================================================
   SCRIPT.JS - PART 02
   CUSTOM CURSOR
@@ -528,128 +456,6 @@ initScrollEffects();
 initScrollDirection();
 
 
-/*==================================================
-  SCRIPT.JS - PART 04
-  MOBILE MENU
-==================================================*/
-
-/*==================================================
-  MOBILE MENU
-==================================================*/
-
-function initMobileMenu(){
-
-    const menuBtn=document.getElementById("menu-btn");
-
-    const closeBtn=document.getElementById("close-menu");
-
-    const mobileMenu=document.getElementById("mobile-menu");
-
-    const menuLinks=document.querySelectorAll(".mobile-menu a");
-
-    if(!menuBtn || !mobileMenu) return;
-
-    /*------------------------------------------
-      OPEN MENU
-    ------------------------------------------*/
-
-    menuBtn.addEventListener("click",()=>{
-
-        mobileMenu.classList.add("active");
-
-        document.body.style.overflow="hidden";
-
-    });
-
-    /*------------------------------------------
-      CLOSE BUTTON
-    ------------------------------------------*/
-
-    if(closeBtn){
-
-        closeBtn.addEventListener("click",closeMenu);
-
-    }
-
-    /*------------------------------------------
-      CLICK MENU LINK
-    ------------------------------------------*/
-
-    menuLinks.forEach(link=>{
-
-        link.addEventListener("click",closeMenu);
-
-    });
-
-    /*------------------------------------------
-      CLICK OUTSIDE
-    ------------------------------------------*/
-
-    document.addEventListener("click",(e)=>{
-
-        if(
-
-            mobileMenu.classList.contains("active") &&
-
-            !mobileMenu.contains(e.target) &&
-
-            !menuBtn.contains(e.target)
-
-        ){
-
-            closeMenu();
-
-        }
-
-    });
-
-    /*------------------------------------------
-      ESC KEY
-    ------------------------------------------*/
-
-    document.addEventListener("keydown",(e)=>{
-
-        if(e.key==="Escape"){
-
-            closeMenu();
-
-        }
-
-    });
-
-    /*------------------------------------------
-      WINDOW RESIZE
-    ------------------------------------------*/
-
-    window.addEventListener("resize",()=>{
-
-        if(window.innerWidth>992){
-
-            closeMenu();
-
-        }
-
-    });
-
-    /*------------------------------------------
-      CLOSE FUNCTION
-    ------------------------------------------*/
-
-    function closeMenu(){
-
-        mobileMenu.classList.remove("active");
-
-        document.body.style.overflow="";
-
-    }
-
-}
-
-/*==================================================
-  INITIALIZE
-==================================================*/
-
-initMobileMenu();
 /*==================================================
   SCRIPT.JS - PART 04
   MOBILE MENU
@@ -1862,209 +1668,6 @@ initHeroParallax();
 initFloatingCards();
 
 initTiltCards();
-
-/*==================================================
-  SCRIPT.JS - PART 14
-  PERFORMANCE OPTIMIZATION
-==================================================*/
-
-"use strict";
-
-/*==================================================
-  DEBOUNCE
-==================================================*/
-
-function debounce(callback, delay = 150){
-
-    let timeout;
-
-    return (...args)=>{
-
-        clearTimeout(timeout);
-
-        timeout = setTimeout(()=>{
-
-            callback.apply(null,args);
-
-        },delay);
-
-    };
-
-}
-
-/*==================================================
-  THROTTLE
-==================================================*/
-
-function throttle(callback, delay = 100){
-
-    let waiting = false;
-
-    return (...args)=>{
-
-        if(waiting) return;
-
-        callback.apply(null,args);
-
-        waiting = true;
-
-        setTimeout(()=>{
-
-            waiting = false;
-
-        },delay);
-
-    };
-
-}
-
-/*==================================================
-  LAZY LOAD IMAGES
-==================================================*/
-
-function initLazyImages(){
-
-    const images = document.querySelectorAll("img");
-
-    if(!("IntersectionObserver" in window)) return;
-
-    const observer = new IntersectionObserver((entries)=>{
-
-        entries.forEach(entry=>{
-
-            if(!entry.isIntersecting) return;
-
-            const image = entry.target;
-
-            image.loading = "lazy";
-
-            observer.unobserve(image);
-
-        });
-
-    });
-
-    images.forEach(image=>{
-
-        observer.observe(image);
-
-    });
-
-}
-
-/*==================================================
-  PRELOAD IMPORTANT IMAGES
-==================================================*/
-
-function preloadHeroImage(){
-
-    const heroImage = document.querySelector(".hero-image img");
-
-    if(!heroImage) return;
-
-    const preload = new Image();
-
-    preload.src = heroImage.src;
-
-}
-
-/*==================================================
-  PASSIVE EVENTS
-==================================================*/
-
-function initPassiveScroll(){
-
-    window.addEventListener(
-
-        "scroll",
-
-        throttle(()=>{
-
-            /* Reserved for future optimizations */
-
-        }),
-
-        { passive:true }
-
-    );
-
-}
-
-/*==================================================
-  PAGE VISIBILITY
-==================================================*/
-
-function initVisibilityAPI(){
-
-    document.addEventListener("visibilitychange",()=>{
-
-        if(document.hidden){
-
-            console.log("Portfolio paused");
-
-        }else{
-
-            console.log("Portfolio resumed");
-
-        }
-
-    });
-
-}
-
-/*==================================================
-  PREFETCH INTERNAL LINKS
-==================================================*/
-
-function prefetchLinks(){
-
-    const links=document.querySelectorAll("a[href]");
-
-    links.forEach(link=>{
-
-        link.addEventListener("mouseenter",()=>{
-
-            const href=link.getAttribute("href");
-
-            if(
-
-                !href ||
-
-                href.startsWith("#") ||
-
-                href.startsWith("http")
-
-            ) return;
-
-            const preload=document.createElement("link");
-
-            preload.rel="prefetch";
-
-            preload.href=href;
-
-            document.head.appendChild(preload);
-
-        });
-
-    });
-
-}
-
-/*==================================================
-  INITIALIZE
-==================================================*/
-
-initLazyImages();
-
-preloadHeroImage();
-
-initPassiveScroll();
-
-initVisibilityAPI();
-
-prefetchLinks();
-
-
 /*==================================================
   SCRIPT.JS - PART 14
   PERFORMANCE OPTIMIZATION
