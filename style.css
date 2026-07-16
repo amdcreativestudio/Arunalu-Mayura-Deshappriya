@@ -1067,6 +1067,35 @@ button,
     box-shadow:0 10px 35px rgba(0,0,0,.28);
 
 }
+/*==================================================
+  HERO SECTION
+==================================================*/
+
+.hero{
+
+    position:relative;
+
+    min-height:100vh;
+
+    padding:160px 0 100px;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.hero-container{
+
+    display:grid;
+
+    grid-template-columns:1.1fr .9fr;
+
+    align-items:center;
+
+    gap:70px;
+
+}
 
 /*==================================================
   NAVBAR
