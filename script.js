@@ -220,21 +220,7 @@ function initCursorVisibility(){
 
     if(!dot || !outline) return;
 
-    document.addEventListener("mouseleave",()=>{
-
-        dot.style.opacity="0";
-
-        outline.style.opacity="0";
-
-    });
-
-    document.addEventListener("mouseenter",()=>{
-
-        dot.style.opacity="1";
-
-        outline.style.opacity="1";
-
-    });
+   
 
 }
 
