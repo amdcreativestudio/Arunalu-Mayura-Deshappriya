@@ -1791,36 +1791,22 @@ let lastScroll = 0;
 
 const header = document.querySelector(".header");
 
-window.addEventListener("scroll",()=>{
-
-    const current = window.pageYOffset;
-
-    if(current > lastScroll && current > 120){
-
-        header.classList.add("hide");
-
-    }else{
-
-        header.classList.remove("hide");
-
-    }
-
-    lastScroll = current;
-
-});
-let lastScrollTop = 0;
-const navbar = document.querySelector(".header");
-
 window.addEventListener("scroll", () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (!navbar) return;
+    let currentScroll = window.pageYOffset;
 
-    if (currentScroll > lastScrollTop && currentScroll > 100) {
-        navbar.style.transform = "translateY(-100%)";
-    } else {
-        navbar.style.transform = "translateY(0)";
+    if (currentScroll <= 10) {
+        header.classList.remove("hide-nav");
+        return;
     }
 
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    if (currentScroll > lastScroll) {
+        // Scrolling Down
+        header.classList.add("hide-nav");
+    } else {
+        // Scrolling Up
+        header.classList.remove("hide-nav");
+    }
+
+    lastScroll = currentScroll;
 });
