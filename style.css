@@ -1037,25 +1037,18 @@ cursor:auto;
 /*==================================================
   HEADER
 ==================================================*/
-
 .header{
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    z-index:1000;
-
-    transition:.35s ease;
-
-    padding:18px 0;
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: transform .35s ease;
 }
 
+.header.hide-nav{
+    transform: translateY(-100%);
+}
 .header.scrolled{
 
     background:rgba(5,8,22,.78);
